@@ -12,18 +12,6 @@ namespace LocationDataCoreLibrary
     {
         public SampleGenerator() { }
 
-
-        
-        public string[] GenerateReducedDataSet()
-        {
-            // "static" file will act as a db
-            var b = new string[] { "" };
-            return b;
-
-        }
-
-
-
         public void Generate(string[] args)
         {
             // ProcessADailyFile_SampleTEST();
@@ -39,7 +27,7 @@ namespace LocationDataCoreLibrary
         {
             // Data to pull:
             string fileOutputName = "DailyDataForHackTrain6_1Month_1Day_TEST.csv";
-            IList<LocationDataType> requiredLocationColumns = new List<LocationDataType>
+            IList<LocationDataType> requiredLocationColumns =   new List<LocationDataType>
                                                                 {
                                                                     LocationDataType.Timestamp,
                                                                     LocationDataType.User_ID,
@@ -281,6 +269,39 @@ namespace LocationDataCoreLibrary
             fileOutputName = "FlowDataForHackTrain6_Dec5Days_User_8.csv";
             dataFilter.Filter = "87b7dc48-58b9-43a8-8f4b-2d2e44a1a994";
             df.ProcessFileToDebugFolder(monthFiles, days, requiredLocationColumns, fileOutputName, dataFilter);
+        }
+
+
+        // SAMPLE 7 to use for API output - mimick real-time scenario ()
+        // Stick to one day, 3rd dec
+        public IList<string[]> GenerateAPISample(string wantedHour)
+        {
+            IDataFilter dataFilter = new DataFilter
+            {
+                FilterType = LocationDataType.User_ID
+            };
+
+            IList<LocationDataType> requiredLocationColumns = new List<LocationDataType>
+                                                                {
+                                                                    LocationDataType.Timestamp,
+                                                                    LocationDataType.User_ID,
+                                                                    LocationDataType.Latitude,
+                                                                    LocationDataType.Longitude,
+                                                                    LocationDataType.Connection_Type,
+                                                                    LocationDataType.Device_Language
+                                                                };
+            string[] monthFiles = { "month=2018-12" };
+            string[] days = {
+                                ",2018-12-03T",
+                            };
+
+            DataFormatter df = new DataFormatter();
+            
+            // reduces data (could have just used subset, but this will do)
+            IList<string> processedFile = df.ProcessFileToList(monthFiles, days, requiredLocationColumns);
+            IList<string[]> processedFileToHourDetails = df.ReduceToHourData(processedFile, wantedHour);
+            IList<string[]> detailsWithAvgs = df.CalculateAvgDistancesForAllToAll(processedFileToHourDetails); // if time refactor to a class
+            return detailsWithAvgs;
         }
     }
 }

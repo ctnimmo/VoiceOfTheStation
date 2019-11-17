@@ -8,7 +8,6 @@ namespace LocationDataCoreLibrary
 {
     public class DataFormatter
     {
-
         public string[] SplitCommaSeperatedRow(string dataRow)
         {
             // 1. Determine quotation marks (where comma are not seperators)
@@ -81,7 +80,7 @@ namespace LocationDataCoreLibrary
             return output;
         }
 
-        public IList<string> ProcessFileToList(IEnumerable<string> monthFiles, IEnumerable<string> days, IEnumerable<LocationDataType> requiredLocationColumns, string fileOutputName, params IDataFilter[] filters)
+        public IList<string> ProcessFileToList(IEnumerable<string> monthFiles, IEnumerable<string> days, IEnumerable<LocationDataType> requiredLocationColumns, params IDataFilter[] filters)
         {
             IList<string> result = new List<string>();
 
@@ -134,44 +133,44 @@ namespace LocationDataCoreLibrary
         }
 
 
+        //// assumes format input is the reduced data format
+        //// therefore first
+        //public IList<string> ReduceToHourData(IList<string> processedFile, string wantedHour)
+        //{
+        //    IList<string> newOutput = new List<string>();
+        //    foreach (string row in processedFile)
+        //    {
+        //        string[] colData = row.Split(',');
+
+
+        //        var dateTimeData = colData[0];
+        //        var dateTimeSplit = dateTimeData.Split('T');
+        //        var date = dateTimeSplit[0].Split('-');
+        //        var year = date[0];
+        //        var month = date[1];
+        //        var day = date[2];
+
+        //        var time = dateTimeSplit[1].Split(':');
+
+        //        var hour = time[0];
+        //        var minute = time[1];
+        //        var secondAndMillisecond = time[2].Split('.');
+        //        var second = secondAndMillisecond[0];
+        //        var milliSecond = secondAndMillisecond[1];
+
+
+        //        if (hour == wantedHour) //this is not very "tight" i.e. logical needs tightening
+        //        {
+        //            newOutput.Add(row);
+        //        }
+        //    }
+        //    return newOutput;
+        //}
+
+
         // assumes format input is the reduced data format
         // therefore first
-        public IList<string> ReduceToHourData(IList<string> processedFile, string wantedHour)
-        {
-            IList<string> newOutput = new List<string>();
-            foreach (string row in processedFile)
-            {
-                string[] colData = row.Split(',');
-
-
-                var dateTimeData = colData[0];
-                var dateTimeSplit = dateTimeData.Split('T');
-                var date = dateTimeSplit[0].Split('-');
-                var year = date[0];
-                var month = date[1];
-                var day = date[2];
-
-                var time = dateTimeSplit[1].Split(':');
-
-                var hour = time[0];
-                var minute = time[1];
-                var secondAndMillisecond = time[2].Split('.');
-                var second = secondAndMillisecond[0];
-                var milliSecond = secondAndMillisecond[1];
-
-
-                if (hour == wantedHour) //this is not very "tight" i.e. logical needs tightening
-                {
-                    newOutput.Add(row);
-                }
-            }
-            return newOutput;
-        }
-
-
-        // assumes format input is the reduced data format
-        // therefore first
-        public IList<string[]> ReduceToHourData_v2(IList<string> processedFile, string wantedHour) // could overload but want to keep seperate for the moment as may diverge functionality
+        public IList<string[]> ReduceToHourData(IList<string> processedFile, string wantedHour) // could overload but want to keep seperate for the moment as may diverge functionality *** comments no longer relevant
         {
             // just return lat long and date time - but as a split
             IList<string[]> newOutput = new List<string[]>();
