@@ -4,29 +4,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using LocationDataCoreLibrary;
 
-namespace LocationDataCoreLibrary
+namespace LocationDataLocatorConsole
 {
-    public class SampleGenerator
+    class Program
     {
-        public SampleGenerator() { }
-
-        public void Generate(string[] args)
+        static void Main(string[] args)
         {
+            Console.WriteLine("Hello World!");
+
+
             // ProcessADailyFile_SampleTEST();
             // ProcessADailyFile_Sample1();
             // ProcessFlowFile_SampleTEST();
             // ProcessFlowFile_Sample1();
             // ProcessFlowFile_Sample2();
             // ProcessFlowFile_Sample3();
+
+
+            SampleGenerator sg = new SampleGenerator();
+            var sdfg= sg.GenerateAPISample("03");
+
+            // Console.ReadKey();
+            Console.WriteLine("Hello World! AGAIN!");
         }
 
         // SAMPLE 1
-        public void ProcessADailyFile_SampleTEST()
+        static public void ProcessADailyFile_SampleTEST()
         {
             // Data to pull:
             string fileOutputName = "DailyDataForHackTrain6_1Month_1Day_TEST.csv";
-            IList<LocationDataType> requiredLocationColumns =   new List<LocationDataType>
+            IList<LocationDataType> requiredLocationColumns = new List<LocationDataType>
                                                                 {
                                                                     LocationDataType.Timestamp,
                                                                     LocationDataType.User_ID,
@@ -42,7 +51,7 @@ namespace LocationDataCoreLibrary
         }
 
         // SAMPLE 2
-        public void ProcessADailyFile_Sample1()
+        static public void ProcessADailyFile_Sample1()
         {
             // Data to pull:
 
@@ -89,7 +98,7 @@ namespace LocationDataCoreLibrary
         }
 
         // SAMPLE 3
-        public void ProcessFlowFile_SampleTEST()
+        static public void ProcessFlowFile_SampleTEST()
         {
             string fileOutputName = "FlowDataForHackTrain6_TEST.csv";
 
@@ -118,7 +127,7 @@ namespace LocationDataCoreLibrary
         }
 
         // SAMPLE 4
-        public void ProcessFlowFile_Sample1()
+        static public void ProcessFlowFile_Sample1()
         {
             string fileOutputName = "FlowDataForHackTrain6_Dec5Days_User_1.csv";
 
@@ -168,7 +177,7 @@ namespace LocationDataCoreLibrary
         }
 
         // SAMPLE 5
-        public void ProcessFlowFile_Sample2()
+        static public void ProcessFlowFile_Sample2()
         {
             string fileOutputName = "FlowDataForHackTrain6_3Months_User_CHECK.csv";
 
@@ -221,7 +230,7 @@ namespace LocationDataCoreLibrary
 
 
         // SAMPLE 6 (Flow Sample 3)
-        public void ProcessFlowFile_Sample3()
+        static public void ProcessFlowFile_Sample3()
         {
             string fileOutputName = "";
 
@@ -268,39 +277,6 @@ namespace LocationDataCoreLibrary
             fileOutputName = "FlowDataForHackTrain6_Dec5Days_User_8.csv";
             dataFilter.Filter = "87b7dc48-58b9-43a8-8f4b-2d2e44a1a994";
             df.ProcessFileToDebugFolder(monthFiles, days, requiredLocationColumns, fileOutputName, dataFilter);
-        }
-
-
-        // SAMPLE 7 to use for API output - mimick real-time scenario ()
-        // Stick to one day, 3rd dec
-        public IList<string[]> GenerateAPISample(string wantedHour)
-        {
-            IDataFilter dataFilter = new DataFilter
-            {
-                FilterType = LocationDataType.User_ID
-            };
-
-            IList<LocationDataType> requiredLocationColumns = new List<LocationDataType>
-                                                                {
-                                                                    LocationDataType.Timestamp,
-                                                                    LocationDataType.User_ID,
-                                                                    LocationDataType.Latitude,
-                                                                    LocationDataType.Longitude,
-                                                                    LocationDataType.Connection_Type,
-                                                                    LocationDataType.Device_Language
-                                                                };
-            string[] monthFiles = { "month=2018-12" };
-            string[] days = {
-                                ",2018-12-03T",
-                            };
-
-            DataFormatter df = new DataFormatter();
-            
-            // reduces data (could have just used subset, but this will do)
-            IList<string> processedFile = df.ProcessFileToList(monthFiles, days, requiredLocationColumns);
-            IList<string[]> processedFileToHourDetails = df.ReduceToHourData(processedFile, wantedHour);
-            IList<string[]> detailsWithAvgs = df.CalculateAvgDistancesForAllToAll(processedFileToHourDetails); // if time refactor to a class
-            return detailsWithAvgs;
         }
     }
 }

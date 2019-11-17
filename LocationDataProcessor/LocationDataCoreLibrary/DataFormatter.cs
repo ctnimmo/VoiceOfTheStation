@@ -128,7 +128,7 @@ namespace LocationDataCoreLibrary
 
         public void ProcessFileToDebugFolder(IEnumerable<string> monthFiles, IEnumerable<string> days, IEnumerable<LocationDataType> requiredLocationColumns, string fileOutputName, params IDataFilter[] filters)
         {
-            IList<string> result = ProcessFileToList(monthFiles, days, requiredLocationColumns, fileOutputName, filters);
+            IList<string> result = ProcessFileToList(monthFiles, days, requiredLocationColumns, filters);
             System.IO.File.WriteAllLines(fileOutputName, result);
         }
 

@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationDataProcessor", "LocationDataProcessor\LocationDataProcessor.csproj", "{91E51987-00D2-4199-BF10-77B48EFDFC20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationDataCoreLibrary", "LocationDataCoreLibrary\LocationDataCoreLibrary.csproj", "{4A1C8BF6-1D1F-4B09-8D4D-E62C79D46703}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationDataCoreLibrary", "LocationDataCoreLibrary\LocationDataCoreLibrary.csproj", "{4A1C8BF6-1D1F-4B09-8D4D-E62C79D46703}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationDataLocatorConsole", "LocationDataLocatorConsole\LocationDataLocatorConsole.csproj", "{7F361BCE-2D8E-4111-8BAA-3FB2E9E9A964}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{4A1C8BF6-1D1F-4B09-8D4D-E62C79D46703}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A1C8BF6-1D1F-4B09-8D4D-E62C79D46703}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A1C8BF6-1D1F-4B09-8D4D-E62C79D46703}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F361BCE-2D8E-4111-8BAA-3FB2E9E9A964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F361BCE-2D8E-4111-8BAA-3FB2E9E9A964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F361BCE-2D8E-4111-8BAA-3FB2E9E9A964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F361BCE-2D8E-4111-8BAA-3FB2E9E9A964}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -53,5 +53,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LocationDataCoreLibrary\LocationDataCoreLibrary.csproj">
+      <Project>{4a1c8bf6-1d1f-4b09-8d4d-e62c79d46703}</Project>
+      <Name>LocationDataCoreLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
