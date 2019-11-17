@@ -60,6 +60,7 @@ namespace LocationDataLocatorConsole
 
             // Console.ReadKey();
             Console.WriteLine("Hello World! AGAIN!");
+            Console.Read();
         }
 
         // SAMPLE 1
