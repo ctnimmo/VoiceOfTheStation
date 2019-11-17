@@ -13,8 +13,13 @@ namespace LocationDataLocatorConsole
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            Console.WriteLine("This is ...");
+            Console.WriteLine("The Voice Of The Station!");
+            Console.WriteLine("...");
+            Console.WriteLine("...");
+            Console.WriteLine("input datetime: 3pm 12 Dec 2018");
 
-
+            
             // ProcessADailyFile_SampleTEST();
             // ProcessADailyFile_Sample1();
             // ProcessFlowFile_SampleTEST();
@@ -24,7 +29,34 @@ namespace LocationDataLocatorConsole
 
 
             SampleGenerator sg = new SampleGenerator();
-            var sdfg= sg.GenerateAPISample("03");
+            var dataset = sg.GenerateAPISample("03", null);
+
+            Console.WriteLine("OUTPUT:");
+            Console.WriteLine("");
+            
+            foreach (var data in dataset)
+            {
+                Console.WriteLine(" ");
+                Console.WriteLine(" ");
+                Console.WriteLine("Year: " + data.Year);
+                Console.WriteLine("Month: " + data.Month);
+                Console.WriteLine("Day: " + data.Day);
+                Console.WriteLine("Hour: " + data.Hour);
+                Console.WriteLine("Minute: " + data.Minute);
+                Console.WriteLine("Second: " + data.Second);
+                Console.WriteLine("MilliSecond: " + data.MilliSecond);
+                Console.WriteLine("UserId: " + data.UserId);
+                Console.WriteLine("Latitude: " + data.Latitude);
+                Console.WriteLine("Longitude: " + data.Longitude);
+                Console.WriteLine("NeigbourhoodSize: " + data.NeigbourhoodSize);
+                Console.WriteLine("AcceptableNeighbourhoodSize: " + data.AcceptableNeighbourhoodSize);
+                Console.WriteLine("IsAcceptable: " + data.IsAcceptable);
+                Console.WriteLine(" ");
+                Console.WriteLine("IsHappyFace: " + data.IsHappyFace);
+                Console.WriteLine(" ");
+                Console.WriteLine(" ");
+            }
+            
 
             // Console.ReadKey();
             Console.WriteLine("Hello World! AGAIN!");

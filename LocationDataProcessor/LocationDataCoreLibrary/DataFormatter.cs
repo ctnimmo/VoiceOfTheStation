@@ -8,6 +8,13 @@ namespace LocationDataCoreLibrary
 {
     public class DataFormatter
     {
+
+        // default value for acceptable neighbourhood (effectively a measure to use like FRUIN)
+        // a feedback loop/control could adjust this accordingly
+        // although may be better in another class
+        public double AcceptableNeighbourhoodSize = 0.01;
+
+
         public string[] SplitCommaSeperatedRow(string dataRow)
         {
             // 1. Determine quotation marks (where comma are not seperators)
@@ -210,7 +217,62 @@ namespace LocationDataCoreLibrary
 
 
 
+        // assumes format input is the reduced data format
+        // therefore first
+        public IList<CalculatedDataOutput> ReduceToHourData_v2C(IList<string> processedFile, string wantedHour) // could overload but want to keep seperate for the moment as may diverge functionality *** comments no longer relevant
+        {
+            IList<CalculatedDataOutput> newOutputC = new List<CalculatedDataOutput>();
+            foreach (string row in processedFile)
+            {
+                string[] colData = row.Split(',');
 
+
+                var dateTimeData = colData[0];
+                var dateTimeSplit = dateTimeData.Split('T');
+                var date = dateTimeSplit[0].Split('-');
+                var year = date[0];
+                var month = date[1];
+                var day = date[2];
+
+                var time = dateTimeSplit[1].Split(':');
+
+                var hour = time[0];
+                var minute = time[1];
+                var secondAndMillisecond = time[2].Split('.');
+                var second = secondAndMillisecond[0];
+                var milliSecond = secondAndMillisecond[1];
+
+
+                var userId = colData[1];
+                var latitude = colData[2];
+                var longitude = colData[3];
+
+                if (hour == wantedHour) //this is not very "tight" i.e. logical needs tightening
+                {
+                    CalculatedDataOutput newOutput = new CalculatedDataOutput
+                    {
+                        Year = year,
+                        Month = month,
+                        Day = day,
+                        Hour = hour,
+                        Minute = minute,
+                        Second = second,
+                        MilliSecond = milliSecond,
+                        UserId = userId,
+                        Latitude = latitude,
+                        Longitude = longitude,
+                        NeigbourhoodSize = "",
+                        AcceptableNeighbourhoodSize = AcceptableNeighbourhoodSize.ToString(),
+                        IsAcceptable = "",
+                        IsHappyFace = ""
+                    };
+                    newOutputC.Add(newOutput);
+                }
+            }
+            return newOutputC;
+        }
+
+        
         public double CalculateDist(LatLongPoint point1, LatLongPoint point2)
         {
             double LatDist = Math.Abs(point1.Latitude - point2.Latitude);
@@ -230,7 +292,6 @@ namespace LocationDataCoreLibrary
             double cumDistanceAToB = 0;
             foreach (string[] row in data)
             {
-
                 var latitude = row[8];
                 var logitude = row[9];
 
@@ -267,5 +328,65 @@ namespace LocationDataCoreLibrary
             }
             return data;
         }
+
+
+
+
+
+
+        public double CalculateAvgDistancesForAToAll_v2C(IList<CalculatedDataOutput> data, LatLongPoint pointA) //ideally the reduced data
+        {
+            double cumDistanceAToB = 0;
+            foreach (CalculatedDataOutput row in data)
+            {
+                var latitude = row.Latitude;
+                var logitude = row.Longitude;
+
+                LatLongPoint pointB = new LatLongPoint
+                {
+                    Latitude = Convert.ToDouble(latitude),
+                    Longitude = Convert.ToDouble(logitude)
+                };
+
+                double distanceAToB = CalculateDist(pointA, pointB);
+                cumDistanceAToB += distanceAToB;
+            }
+
+            if (data.Count() == 0) // zero error
+            {
+                return 0; // not technically true but ok for here
+            }
+
+            double avgDistanceForAToAll = cumDistanceAToB / data.Count(); // this forms the index measure for the last hour
+            return avgDistanceForAToAll;
+        }
+
+        public IList<CalculatedDataOutput> CalculateAvgDistancesForAllToAll_v2C(IList<CalculatedDataOutput> data) //the data in the finally element of array should be empty string - see ReduceToHourData_v2 ... note this is bug prone due to it being called from anthine
+        {
+            foreach (CalculatedDataOutput dataRow in data)
+            {
+                LatLongPoint pointB = new LatLongPoint
+                {
+                    Latitude = Convert.ToDouble(dataRow.Latitude),
+                    Longitude = Convert.ToDouble(dataRow.Longitude)
+                };
+                double avgDist = CalculateAvgDistancesForAToAll_v2C(data, pointB);
+                // dataRow[dataRow.Length - 1] = avgDist.ToString(); // this end element should be "", but could do with a sanity check/validation. Even better, use a proper class!
+                dataRow.NeigbourhoodSize = avgDist.ToString();
+                double analyse = avgDist-AcceptableNeighbourhoodSize;
+                if (analyse > 0)
+                {
+                    dataRow.IsAcceptable = true.ToString();
+                    dataRow.IsHappyFace = " :-) ";
+                }
+                else
+                {
+                    dataRow.IsAcceptable = true.ToString();
+                    dataRow.IsHappyFace = " :-( ";
+                }
+            }
+            return data;
+        }
+
     }
 }

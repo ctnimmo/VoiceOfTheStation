@@ -273,7 +273,7 @@ namespace LocationDataCoreLibrary
 
         // SAMPLE 7 to use for API output - mimick real-time scenario ()
         // Stick to one day, 3rd dec
-        public IList<string[]> GenerateAPISample(string wantedHour)
+        public IList<CalculatedDataOutput> GenerateAPISample(string wantedHour, double? acceptableDistance)
         {
             IDataFilter dataFilter = new DataFilter
             {
@@ -300,7 +300,11 @@ namespace LocationDataCoreLibrary
             IList<string> processedFile = df.ProcessFileToList(monthFiles, days, requiredLocationColumns);
             IList<string[]> processedFileToHourDetails = df.ReduceToHourData(processedFile, wantedHour);
             IList<string[]> detailsWithAvgs = df.CalculateAvgDistancesForAllToAll(processedFileToHourDetails); // if time refactor to a class
-            return detailsWithAvgs;
+            
+            IList<CalculatedDataOutput> processedFileToHourDetails_v2C = df.ReduceToHourData_v2C(processedFile, wantedHour);
+            IList<CalculatedDataOutput> detailsWithAvgs_v2C = df.CalculateAvgDistancesForAllToAll_v2C(processedFileToHourDetails_v2C);
+
+            return detailsWithAvgs_v2C;
         }
     }
 }
