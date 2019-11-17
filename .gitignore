@@ -3,3 +3,11 @@
 ################################################################################
 
 /.vs
+/VoiceOfTheStation.API/.vs/VoiceOfTheStation.API
+/VoiceOfTheStation.API/VoiceOfTheStation.API/bin/Debug/netcoreapp2.1
+/VoiceOfTheStation.API/VoiceOfTheStation.API/Data/DailyDataForHackTrain6.csv
+/VoiceOfTheStation.API/VoiceOfTheStation.API/obj
+/LocationDataProcessor/LocationDataProcessor/obj/Debug
+/LocationDataProcessor/LocationDataProcessor/bin/Debug
+/LocationDataProcessor/.vs
+/LocationDataProcessor/LocationDataCoreLibrary/obj

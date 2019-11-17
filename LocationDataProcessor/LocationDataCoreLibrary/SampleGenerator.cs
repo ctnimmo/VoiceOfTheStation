@@ -1,14 +1,30 @@
 ﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LocationDataProcessor
+
+namespace LocationDataCoreLibrary
 {
-    class Program
+    public class SampleGenerator
     {
-        static void Main(string[] args)
+        public SampleGenerator() { }
+
+
+        
+        public string[] GenerateReducedDataSet()
+        {
+            // "static" file will act as a db
+            var b = new string[] { "" };
+            return b;
+
+        }
+
+
+
+        public void Generate(string[] args)
         {
             // ProcessADailyFile_SampleTEST();
             // ProcessADailyFile_Sample1();
@@ -19,7 +35,7 @@ namespace LocationDataProcessor
         }
 
         // SAMPLE 1
-        static public void ProcessADailyFile_SampleTEST()
+        public void ProcessADailyFile_SampleTEST()
         {
             // Data to pull:
             string fileOutputName = "DailyDataForHackTrain6_1Month_1Day_TEST.csv";
@@ -39,7 +55,7 @@ namespace LocationDataProcessor
         }
 
         // SAMPLE 2
-        static public void ProcessADailyFile_Sample1()
+        public void ProcessADailyFile_Sample1()
         {
             // Data to pull:
 
@@ -86,7 +102,7 @@ namespace LocationDataProcessor
         }
 
         // SAMPLE 3
-        static public void ProcessFlowFile_SampleTEST()
+        public void ProcessFlowFile_SampleTEST()
         {
             string fileOutputName = "FlowDataForHackTrain6_TEST.csv";
 
@@ -115,7 +131,7 @@ namespace LocationDataProcessor
         }
 
         // SAMPLE 4
-        static public void ProcessFlowFile_Sample1()
+        public void ProcessFlowFile_Sample1()
         {
             string fileOutputName = "FlowDataForHackTrain6_Dec5Days_User_1.csv";
 
@@ -165,7 +181,7 @@ namespace LocationDataProcessor
         }
 
         // SAMPLE 5
-        static public void ProcessFlowFile_Sample2()
+        public void ProcessFlowFile_Sample2()
         {
             string fileOutputName = "FlowDataForHackTrain6_3Months_User_CHECK.csv";
 
@@ -218,7 +234,7 @@ namespace LocationDataProcessor
 
 
         // SAMPLE 6 (Flow Sample 3)
-        static public void ProcessFlowFile_Sample3()
+        public void ProcessFlowFile_Sample3()
         {
             string fileOutputName = "";
 
@@ -247,11 +263,11 @@ namespace LocationDataProcessor
 
             DataFormatter df = new DataFormatter();
 
-             /*
-             a8b170c7-8b5b-494c-9fdb-ff453d36f577
-             b5dfa510-14d0-4c88-b064-dc53ceea290c    
-             87b7dc48-58b9-43a8-8f4b-2d2e44a1a994
-             */
+            /*
+            a8b170c7-8b5b-494c-9fdb-ff453d36f577
+            b5dfa510-14d0-4c88-b064-dc53ceea290c    
+            87b7dc48-58b9-43a8-8f4b-2d2e44a1a994
+            */
 
             fileOutputName = "FlowDataForHackTrain6_Dec5Days_User_6.csv";
             dataFilter.Filter = "a8b170c7-8b5b-494c-9fdb-ff453d36f577";
