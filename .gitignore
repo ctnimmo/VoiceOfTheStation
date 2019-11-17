@@ -11,3 +11,6 @@
 /LocationDataProcessor/LocationDataProcessor/bin/Debug
 /LocationDataProcessor/.vs
 /LocationDataProcessor/LocationDataCoreLibrary/obj
+/LocationDataProcessor/LocationDataCoreLibrary/bin/Debug/netcoreapp2.1
+/LocationDataProcessor/LocationDataLocatorConsole/bin/Debug/netcoreapp2.1
+/LocationDataProcessor/LocationDataLocatorConsole/obj

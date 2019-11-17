@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2016
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoiceOfTheStation.API", "VoiceOfTheStation.API\VoiceOfTheStation.API.csproj", "{EB680A0B-2499-48A7-947C-37E7A6BC463B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB680A0B-2499-48A7-947C-37E7A6BC463B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB680A0B-2499-48A7-947C-37E7A6BC463B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB680A0B-2499-48A7-947C-37E7A6BC463B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB680A0B-2499-48A7-947C-37E7A6BC463B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8BF07067-38E9-42C7-9219-2F732B173B38}
+	EndGlobalSection
+EndGlobal
